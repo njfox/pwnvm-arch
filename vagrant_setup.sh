@@ -1,7 +1,8 @@
 # update and pull basic core development packages/utilities
 sudo pacman -Syu --noconfirm
 sudo pacman -S git python python-pip python2 python2-pip lib32-gcc-libs clang llvm \
-pacman-contrib go base-devel vim tmux unzip zip unrar wget mlocate cmake python2-virtualenv --noconfirm
+pacman-contrib go base-devel vim tmux unzip zip unrar wget mlocate cmake python2-virtualenv \
+netcat --noconfirm
 
 echo "set -g mouse on" > ~/.tmux.conf
 mkdir ~/tools
