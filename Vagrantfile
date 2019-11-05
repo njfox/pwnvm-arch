@@ -17,7 +17,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       override.vm.network "private_network", ip: "10.10.10.10"
       # Sync a folder between the host and all guests.
       # Uncomment this line (and adjust as you like)
-      override.vm.synced_folder "~/ctf", "/ctf"
+      # override.vm.synced_folder "~/ctf", "/ctf"
 
       vb.name = name
       vb.memory = memory
