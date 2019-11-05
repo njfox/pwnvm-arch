@@ -1,5 +1,5 @@
 # pwnvm - Arch Linux Edition
-A modified version of [OpenToAll's pwnvm](https://github.com/OpenToAllCTF/pwnvm) based on Arch Linux. pwnvm - Arch Linux Edition is a ready-to-go VM you can use to work on most pwn/reversing challenges in CTFs with little-to-no additional setup.
+A modified version of [OpenToAll's pwnvm](https://github.com/OpenToAllCTF/pwnvm) based on Arch Linux. pwnvm is a ready-to-go VM you can use to work on most pwn/reversing challenges in CTFs with little-to-no additional setup.
 
 ## Installation
 1. Install a hypervisor. The following hypervisors are supported:
