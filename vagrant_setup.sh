@@ -13,6 +13,13 @@ git clone https://aur.archlinux.org/yay.git
 cd yay && makepkg -si --noconfirm
 cd ~
 
+# The official glibc doesn't include symbols, but we can modify the package to include them ourselves
+# https://github.com/bet4it/build-an-efficient-pwn-environment#glibc
+cd ~/tools && yay -G glibc && cd glibc
+sed -i 's/options=(!strip staticlibs)/options=(!strip debug staticlibs)/' PKGBUILD
+makepkg -si --noconfirm
+cd ~
+
 # gef and dependencies
 yay -S python-capstone python-keystone python-unicorn python-ropper ropgadget gef-git --noconfirm
 # Note if you want to use peda or pwndbg instead, you need to manually modify your ~/.gdbinit
