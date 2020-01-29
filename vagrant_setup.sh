@@ -21,7 +21,7 @@ makepkg -si --noconfirm
 cd ~
 
 # gef and dependencies
-yay -S python-capstone python-keystone python-unicorn python-ropper ropgadget gef-git --noconfirm
+yay -S python-capstone python-keystone python-unicorn-git python-ropper ropgadget gef-git --noconfirm
 # Note if you want to use peda or pwndbg instead, you need to manually modify your ~/.gdbinit
 echo "source /usr/share/gef/gef.py" > ~/.gdbinit
 
