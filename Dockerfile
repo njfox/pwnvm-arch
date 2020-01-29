@@ -1,3 +1,5 @@
+from archlinux
+
 # update and pull basic core development packages/utilities
 RUN sudo pacman -Syu --noconfirm \
   && sudo pacman -S git python python-pip python2 python2-pip lib32-gcc-libs clang llvm \
