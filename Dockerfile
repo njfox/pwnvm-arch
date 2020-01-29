@@ -1,4 +1,4 @@
-from archlinux
+FROM archlinux
 
 # update and pull basic core development packages/utilities
 RUN pacman -Syu --noconfirm \
