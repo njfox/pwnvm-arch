@@ -66,4 +66,9 @@ sudo chmod +x /usr/local/bin/fixenv
 # z3
 sudo pacman -S python-z3 --noconfirm
 
+# AFL
+sudo pacman -S afl afl-utils --noconfirm
+
+# Clean up
+sudo paccache --remove --keep 0
 rm -rf ~/aur
