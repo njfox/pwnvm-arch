@@ -31,10 +31,10 @@ RUN mkdir /tmp/aur && cd /tmp/aur \
 
 # The official glibc doesn't include symbols, but we can modify the package to include them ourselves
 # https://github.com/bet4it/build-an-efficient-pwn-environment#glibc
-RUN cd ~/tools && yay -G glibc && cd glibc \
+RUN cd /tmp/aur && yay -G glibc && cd glibc \
   && sed -i 's/options=(!strip staticlibs)/options=(!strip debug staticlibs)/' PKGBUILD \
   && makepkg -si --noconfirm \
-  && cd ~
+  && cd ~ && rm -rf /tmp/aur/glibc
 
 # gef and dependencies
 RUN yay -S python-capstone python-keystone python-unicorn-git python-ropper ropgadget gef-git --noconfirm \

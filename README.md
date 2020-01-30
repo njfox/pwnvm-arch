@@ -1,6 +1,8 @@
 # pwnvm - Arch Linux Edition
 A modified version of [OpenToAll's pwnvm](https://github.com/OpenToAllCTF/pwnvm) based on Arch Linux. pwnvm is a ready-to-go VM you can use to work on most pwn/reversing challenges in CTFs with little-to-no additional setup.
 
+**Note:** Docker is now supported! Skip to [Docker Instructions](#running-in-docker) to get started. If you're using vagrant and a traditional hypervisor like VirtualBox, continue reading the original instructions below.
+
 ## Installation
 1. Install a hypervisor. The following hypervisors are supported:
    * VirtualBox (default, recommended)
@@ -34,3 +36,43 @@ You should never have to open your hypervisor to manage the VMs. Everything can 
 * Bring down VM: `vagrant halt [<vm>]`
 * Bring up VM: `vagrant up [<vm>]`
 * Scrap VM: `vagrant destroy [<vm>]`
+
+## Running in Docker
+Docker is also supported as a lighter-weight alternative to a full virtual machine under a traditional hypervisor. Some caveats:
+
+* Docker containers are designed to be immutable, meaning that by default your changes and files created inside the container will not be saved when you exit.
+* If running on a Linux host, some system settings may need to be modified on the host for things to work correctly (e.g., core dump locations, ASLR). For this reason, I recommend vagrant if your host box is Linux.
+
+### Installation
+1. Install docker on your host operating system.
+2. Run `docker pull njfox/pwnvm-arch`
+
+To build the container locally instead, clone this repository and run the following command from the docker sub-directory:
+
+```
+$ git clone https://github.com/njfox/pwnvm-arch && cd pwnvm-arch/docker && docker build -t pwnvm-arch .
+```
+
+### Usage
+```
+$ docker/run.sh
+```
+
+Tools, virtualenvs etc. are installed in `~/tools`.
+
+#### Mounting Folders
+To mount a folder from the host to persist changes (recommended), add the -v argument when launching the run script. The following example mounts `/home/nick/ctf` on the host to `/ctf` within the container:
+
+```
+$ docker/run.sh -v /home/nick/ctf:/ctf
+```
+
+#### Forwarding Ports
+Add the `-p <host port>:<docker port>` switch to forward ports from the host. The following command launches the container with port 4444 on the host being forwarded to port 80 on the container:
+
+```
+$ docker/run.sh -p 4444:80
+```
+
+### Extending the Container
+If you want to customize the pwnvm container, you can create your own Dockerfile with `FROM njfox/pwnvm-arch` at the top. Then any customizations you add will be layered on top of the base container.
