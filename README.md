@@ -55,6 +55,12 @@ $ git clone https://github.com/njfox/pwnvm-arch && cd pwnvm-arch/docker && docke
 
 ### Usage
 ```
+$ docker run --rm -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined njfox/pwnvm-arch /bin/bash
+```
+Note the `--cap-add` and `--security-opt` flags are required for proper debugging within Docker.
+
+If you've cloned this repository, you can use the convenient launcher script instead at `docker/run.sh`:
+```
 $ docker/run.sh
 ```
 
