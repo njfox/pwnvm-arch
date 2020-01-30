@@ -1,17 +1,30 @@
 FROM archlinux
 
+# Create normal user so makepkg is happy
+RUN useradd -m user && passwd -d user \
+  && printf 'user ALL=(ALL) ALL\n' | tee -a /etc/sudoers
+
+# Allow installation of manpages with packages
+RUN sed -i '/NoExtract  = usr\/share\/man\//d' /etc/pacman.conf
+
+# Bump cpu cores for compiling packages
+RUN sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j4"/' /etc/makepkg.conf
+
 # update and pull basic core development packages/utilities
 RUN pacman -Syu --noconfirm \
   && pacman -S git python python-pip python2 python2-pip lib32-gcc-libs clang llvm \
   pacman-contrib go base-devel vim tmux unzip zip unrar wget mlocate cmake python2-virtualenv \
-  netcat net-tools dnsutils sudo --noconfirm
+  netcat net-tools dnsutils sudo man man-pages --noconfirm
+
+# Switch to normal user for the rest of the build
+USER user:user
 
 RUN echo "set -g mouse on" > ~/.tmux.conf
 
 RUN mkdir ~/tools
 
 # yay for AUR packages
-RUN mkdir aur && cd aur \
+RUN mkdir /tmp/aur && cd /tmp/aur \
   && git clone https://aur.archlinux.org/yay.git \
   && cd yay && makepkg -si --noconfirm \
   && cd ~
@@ -24,7 +37,7 @@ RUN cd ~/tools && yay -G glibc && cd glibc \
   && cd ~
 
 # gef and dependencies
-RUN yay -S python-capstone python-keystone python-unicorn python-ropper ropgadget gef-git --noconfirm \
+RUN yay -S python-capstone python-keystone python-unicorn-git python-ropper ropgadget gef-git --noconfirm \
   # Note if you want to use peda or pwndbg instead, you need to manually modify your ~/.gdbinit
   && echo "source /usr/share/gef/gef.py" > ~/.gdbinit
 
@@ -65,4 +78,7 @@ RUN sudo wget -O /usr/local/bin/fixenv https://raw.githubusercontent.com/hellman
 # z3
 RUN sudo pacman -S python-z3 --noconfirm
 
-RUN rm -rf ~/aur
+# Clean up
+RUN rm -rf /tmp/aur && rm -rf ~/.cache/yay
+
+WORKDIR /home/user
