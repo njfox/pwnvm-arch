@@ -1,5 +1,5 @@
 # update and pull basic core development packages/utilities
-sudo pacman -Syu --noconfirm
+sudo pacman -Syyu --noconfirm
 sudo pacman -S git python python-pip python2 python2-pip lib32-gcc-libs clang llvm \
 pacman-contrib go base-devel vim tmux unzip zip unrar wget mlocate cmake python2-virtualenv \
 netcat net-tools dnsutils man man-pages --noconfirm
@@ -17,6 +17,7 @@ cd ~
 # https://github.com/bet4it/build-an-efficient-pwn-environment#glibc
 cd ~/tools && yay -G glibc && cd glibc
 sed -i 's/options=(!strip staticlibs)/options=(!strip debug staticlibs)/' PKGBUILD
+gpg --recv-key 79C43DFBF1CF2187
 makepkg -si --noconfirm
 cd ~
 
