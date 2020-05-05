@@ -59,7 +59,7 @@ $ docker run --rm -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined njf
 ```
 Note the `--cap-add` and `--security-opt` flags are required for proper debugging within Docker.
 
-If you've cloned this repository, you can use the convenient launcher script instead at `docker/run.sh`:
+This repository contains a launcher script instead at `docker/run.sh` (you need to modify the tag in the script if you built locally):
 ```
 $ docker/run.sh
 ```
