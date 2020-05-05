@@ -12,7 +12,7 @@ mkdir aur && cd aur
 git clone https://aur.archlinux.org/yay.git
 # Build in clean chroot to work around weird libffi.so.6 error that cropped up
 cd yay && mkdir chroot
-export CHROOT=/home/vagrant/yay/chroot
+export CHROOT=/home/vagrant/aur/yay/chroot
 mkarchroot $CHROOT/root base-devel
 arch-nspawn $CHROOT/root pacman -Syu
 makechrootpkg -c -r $CHROOT
