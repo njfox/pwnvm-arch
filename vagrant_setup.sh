@@ -2,7 +2,7 @@
 sudo pacman -Syyu --noconfirm
 sudo pacman -S git python python-pip python2 python2-pip lib32-gcc-libs clang llvm \
 pacman-contrib go base-devel vim tmux unzip zip unrar wget mlocate cmake python2-virtualenv \
-netcat net-tools dnsutils man man-pages --noconfirm
+netcat net-tools dnsutils man man-pages dev-tools --noconfirm
 
 echo "set -g mouse on" > ~/.tmux.conf
 mkdir ~/tools
@@ -10,7 +10,13 @@ mkdir ~/tools
 # yay for AUR packages
 mkdir aur && cd aur
 git clone https://aur.archlinux.org/yay.git
-cd yay && makepkg -si --noconfirm
+# Build in clean chroot to work around weird libffi.so.6 error that cropped up
+cd yay && mkdir chroot
+export CHROOT=/home/vagrant/yay/chroot
+mkarchroot $CHROOT/root base-devel
+arch-nspawn $CHROOT/root pacman -Syu
+makechrootpkg -c -r $CHROOT
+sudo pacman -U *.tar.xz --noconfirm
 cd ~
 
 # The official glibc doesn't include symbols, but we can modify the package to include them ourselves
