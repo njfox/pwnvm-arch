@@ -1,5 +1,8 @@
+# update mirrorlist because the list in the base box is old and broken
+sudo reflector -l 200 -f 10 --sort rate -c 'United States' --save /etc/pacman.d/mirrorlist
+
 # update and pull basic core development packages/utilities
-sudo pacman -Syyu --noconfirm
+sudo pacman -Syyuu --noconfirm
 sudo pacman -S git python python-pip python2 python2-pip lib32-gcc-libs clang llvm \
 pacman-contrib go base-devel vim tmux unzip zip unrar wget mlocate cmake python2-virtualenv \
 netcat net-tools dnsutils man man-pages devtools --noconfirm
@@ -10,13 +13,7 @@ mkdir ~/tools
 # yay for AUR packages
 mkdir aur && cd aur
 git clone https://aur.archlinux.org/yay.git
-# Build in clean chroot to work around weird libffi.so.6 error that cropped up
-cd yay && mkdir chroot
-export CHROOT=/home/vagrant/aur/yay/chroot
-mkarchroot $CHROOT/root base-devel
-arch-nspawn $CHROOT/root pacman -Syu
-makechrootpkg -c -r $CHROOT
-sudo pacman -U *.tar.xz --noconfirm
+cd yay && makepkg -si --noconfirm
 cd ~
 
 # The official glibc doesn't include symbols, but we can modify the package to include them ourselves
