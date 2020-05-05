@@ -38,7 +38,7 @@ sudo pacman -S peda --noconfirm
 echo "#source /usr/share/peda/peda.py" >> ~/.gdbinit
 
 # pwntools
-yay -S python-pwntools-git --noconfirm
+sudo pacman -S python-pwntools --noconfirm
 
 # pwntools for python2
 # The python2-pwntools package conflicts with the Python 3 version so install into a venv in ~/tools
