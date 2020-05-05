@@ -35,11 +35,12 @@ RUN mkdir /tmp/aur && cd /tmp/aur \
 # https://github.com/bet4it/build-an-efficient-pwn-environment#glibc
 RUN cd /tmp/aur && yay -G glibc && cd glibc \
   && sed -i 's/options=(!strip staticlibs)/options=(!strip debug staticlibs)/' PKGBUILD \
+  && gpg --keyserver keyserver.ubuntu.com --recv-keys 79C43DFBF1CF2187 \
   && makepkg -si --noconfirm \
   && cd ~ && rm -rf /tmp/aur/glibc
 
 # gef and dependencies
-RUN yay -S python-capstone python-keystone python-unicorn-git python-ropper ropgadget gef-git --noconfirm \
+RUN yay -S python-capstone python-keystone python-unicorn python-ropper ropgadget gef-git --noconfirm \
   # Note if you want to use peda or pwndbg instead, you need to manually modify your ~/.gdbinit
   && echo "source /usr/share/gef/gef.py" > ~/.gdbinit \
   && rm -rf ~/.cache/yay \
