@@ -23,7 +23,7 @@ cd ~
 # https://github.com/bet4it/build-an-efficient-pwn-environment#glibc
 cd ~/tools && yay -G glibc && cd glibc
 sed -i 's/options=(!strip staticlibs)/options=(!strip debug staticlibs)/' PKGBUILD
-gpg --recv-key 79C43DFBF1CF2187
+gpg --keyserver keyserver.ubuntu.com --recv-keys 79C43DFBF1CF2187
 makepkg -si --noconfirm
 cd ~
 
