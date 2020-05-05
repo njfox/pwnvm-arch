@@ -2,7 +2,7 @@
 sudo pacman -Syyu --noconfirm
 sudo pacman -S git python python-pip python2 python2-pip lib32-gcc-libs clang llvm \
 pacman-contrib go base-devel vim tmux unzip zip unrar wget mlocate cmake python2-virtualenv \
-netcat net-tools dnsutils man man-pages dev-tools --noconfirm
+netcat net-tools dnsutils man man-pages devtools --noconfirm
 
 echo "set -g mouse on" > ~/.tmux.conf
 mkdir ~/tools
