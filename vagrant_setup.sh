@@ -73,6 +73,11 @@ sudo pacman -S python-z3 --noconfirm
 # AFL
 sudo pacman -S afl afl-utils --noconfirm
 
+# fzf
+sudo pacman -S fzf --noconfirm
+echo "source /usr/share/fzf/key-bindings.bash" >> ~/.bashrc
+echo "source /usr/share/fzf/completion.bash" >> ~/.bashrc
+
 # Clean up
 sudo paccache --remove --keep 0
 rm -rf ~/aur

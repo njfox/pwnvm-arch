@@ -94,6 +94,12 @@ RUN sudo pacman -S python-z3 --noconfirm \
 RUN sudo pacman -S afl afl-utils --noconfirm \
   && sudo paccache --remove --keep 0
 
+# fzf
+RUN sudo pacman -S fzf --noconfirm \
+  && echo "source /usr/share/fzf/key-bindings.bash" >> ~/.bashrc \
+  && echo "source /usr/share/fzf/completion.bash" >> ~/.bashrc \
+  && sudo paccache --remove --keep 0
+
 # Clean up
 RUN rm -rf /tmp/aur
 
