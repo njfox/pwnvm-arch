@@ -49,8 +49,8 @@ deactivate
 # qemu
 sudo pacman -S qemu-headless qemu-headless-arch-extra --noconfirm
 
-# r2
-sudo pacman -S radare2 --noconfirm
+# r2 and ghidra decompiler plugin
+sudo pacman -S radare2 r2ghidra-dec --noconfirm
 
 # angr
 # The python-angr-git AUR package requires gcc7 being built from source (which takes ages)

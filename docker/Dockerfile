@@ -67,8 +67,8 @@ RUN cd ~/tools && virtualenv2 pwntools2 && source pwntools2/bin/activate \
 RUN sudo pacman -S qemu-headless qemu-headless-arch-extra --noconfirm \
   && sudo paccache --remove --keep 0
 
-# r2
-RUN sudo pacman -S radare2 --noconfirm \
+# r2 and ghidra decompiler plugin
+RUN sudo pacman -S radare2 r2ghidra-dec --noconfirm \
   && sudo paccache --remove --keep 0
 
 # angr
