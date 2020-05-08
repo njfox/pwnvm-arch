@@ -82,3 +82,22 @@ $ docker/run.sh -p 4444:80
 
 ### Extending the Container
 If you want to customize the pwnvm container, you can create your own Dockerfile with `FROM njfox/pwnvm-arch` at the top. Then any customizations you add will be layered on top of the base container.
+
+## Included Tools
+The following tools have been installed and are ready to use:
+
+* `yay`
+* `gef` and all optional dependencies, including `unicorn`, `capstone`, `keystone`, and `ropper`
+* `pwndbg`
+* `peda`
+* `pwntools` (Python 3 branch, although the Python 2 branch is included in a venv in `~/tools/pwntools2`)
+* `qemu` and additional architectures
+* `r2` and the `r2ghidra-dec` plugin, which includes the Ghidra decompiler
+* `angr`
+* `binwalk`
+* `fixenv`
+* `z3`
+* `afl` and `afl-utils`
+* `fzf`
+
+Suggestions for new tools to be included are welcome! Please open an issue to request your favorite RE/pwning tools to be added to the project.
