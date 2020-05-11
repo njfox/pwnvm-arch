@@ -99,5 +99,6 @@ The following tools have been installed and are ready to use:
 * `z3`
 * `afl` and `afl-utils`
 * `fzf`
+* `powerline`, as well as the default fonts, vim, and tmux plugins
 
 Suggestions for new tools to be included are welcome! Please open an issue to request your favorite RE/pwning tools to be added to the project.

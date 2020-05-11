@@ -78,6 +78,20 @@ sudo pacman -S fzf --noconfirm
 echo "source /usr/share/fzf/key-bindings.bash" >> ~/.bashrc
 echo "source /usr/share/fzf/completion.bash" >> ~/.bashrc
 
+# powerline
+sudo pacman -S powerline powerline-fonts powerline-vim python-pygit2
+tee -a ~/.bashrc << END 
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+. /usr/share/powerline/bindings/bash/powerline.sh
+END
+echo "let g:powerline_pycmd=\"py3\"" >> ~/.vimrc
+echo "set laststatus=2" >> ~/.vimrc
+echo "let g:powerline_pycmd=\"py3\"" | sudo tee -a /root/.vimrc
+echo "set laststatus=2" | sudo tee -a /root/.vimrc
+echo "source /usr/lib/python3.8/site-packages/powerline/bindings/tmux/powerline.conf" >> ~/.tmux.conf
+
 # Clean up
 sudo paccache --remove --keep 0
 rm -rf ~/aur

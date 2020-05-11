@@ -100,6 +100,19 @@ RUN sudo pacman -S fzf --noconfirm \
   && echo "source /usr/share/fzf/completion.bash" >> ~/.bashrc \
   && sudo paccache --remove --keep 0
 
+# powerline
+RUN sudo pacman -S powerline powerline-fonts powerline-vim python-pygit2 --noconfirm \
+  && echo "powerline-daemon -q" >> ~/.bashrc \
+  && echo "POWERLINE_BASH_CONTINUATION=1" >> ~/.bashrc \
+  && echo "POWERLINE_BASH_SELECT=1" >> ~/.bashrc \
+  && echo ". /usr/share/powerline/bindings/bash/powerline.sh" >> ~/.bashrc \
+  && echo "let g:powerline_pycmd=\"py3\"" >> ~/.vimrc \
+  && echo "set laststatus=2" >> ~/.vimrc \
+  && echo "let g:powerline_pycmd=\"py3\"" | sudo tee -a /root/.vimrc \
+  && echo "set laststatus=2" | sudo tee -a /root/.vimrc \
+  && echo "source /usr/lib/python3.8/site-packages/powerline/bindings/tmux/powerline.conf" >> ~/.tmux.conf \
+  && sudo paccache --remove --keep 0
+
 # Clean up
 RUN rm -rf /tmp/aur
 
