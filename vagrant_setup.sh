@@ -79,7 +79,7 @@ echo "source /usr/share/fzf/key-bindings.bash" >> ~/.bashrc
 echo "source /usr/share/fzf/completion.bash" >> ~/.bashrc
 
 # powerline
-sudo pacman -S powerline powerline-fonts powerline-vim python-pygit2
+sudo pacman -S powerline powerline-fonts powerline-vim python-pygit2 --noconfirm
 tee -a ~/.bashrc << END 
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
