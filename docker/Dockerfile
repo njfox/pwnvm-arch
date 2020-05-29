@@ -10,10 +10,15 @@ RUN sed -i '/NoExtract  = usr\/share\/man\//d' /etc/pacman.conf
 # Bump cpu cores for compiling packages
 RUN sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j4"/' /etc/makepkg.conf
 
+# update mirrorlist
+RUN pacman -Syy reflector pacman-contrib --noconfirm \
+  && reflector -l 200 -f 10 --sort rate -c 'United States' --save /etc/pacman.d/mirrorlist \
+  && paccache --remove --keep 0
+
 # update and pull basic core development packages/utilities
-RUN pacman -Syu --noconfirm \
+RUN pacman -Syyuu --noconfirm \
   && pacman -S git python python-pip python2 python2-pip lib32-gcc-libs clang llvm \
-  pacman-contrib go base-devel vim tmux unzip zip unrar wget mlocate cmake python2-virtualenv \
+  go base-devel vim tmux unzip zip unrar wget mlocate cmake python2-virtualenv \
   netcat net-tools dnsutils sudo man man-pages --noconfirm \
   && paccache --remove --keep 0
 
@@ -111,6 +116,18 @@ RUN sudo pacman -S powerline powerline-fonts powerline-vim python-pygit2 --nocon
   && echo "let g:powerline_pycmd=\"py3\"" | sudo tee -a /root/.vimrc \
   && echo "set laststatus=2" | sudo tee -a /root/.vimrc \
   && echo "source /usr/lib/python3.8/site-packages/powerline/bindings/tmux/powerline.conf" >> ~/.tmux.conf \
+  && sudo paccache --remove --keep 0
+
+# minimal vim configuration
+RUN echo "syntax on" >> ~/.vimrc \
+  && echo "filetype plugin indent on" >> ~/.vimrc \
+  && echo "set tabstop=4" >> ~/.vimrc \
+  && echo "set shiftwidth=4" >> ~/.vimrc \
+  && echo "set expandtab" >> ~/.vimrc
+
+# one_gadget
+RUN yay -S one_gadget --noconfirm \
+  && rm -rf ~/.cache/yay \
   && sudo paccache --remove --keep 0
 
 # Clean up
