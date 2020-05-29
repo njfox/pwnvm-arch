@@ -130,6 +130,9 @@ RUN yay -S one_gadget --noconfirm \
   && rm -rf ~/.cache/yay \
   && sudo paccache --remove --keep 0
 
+# enable ptrace on non-Linux systems (requires running container with --privileged on OSX)
+RUN echo "kernel.yama.ptrace_scope = 0" | sudo tee /etc/sysctl.d/10-ptrace.conf
+
 # Clean up
 RUN rm -rf /tmp/aur
 

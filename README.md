@@ -54,15 +54,11 @@ $ git clone https://github.com/njfox/pwnvm-arch && cd pwnvm-arch/docker && docke
 ```
 
 ### Usage
-```
-$ docker run --rm -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined njfox/pwnvm-arch /bin/bash
-```
-Note the `--cap-add` and `--security-opt` flags are required for proper debugging within Docker.
-
 This repository contains a launcher script instead at `docker/run.sh` (you need to modify the tag in the script if you built locally):
 ```
 $ docker/run.sh
 ```
+If you're on OSX, you need to additionally pass the `--privileged` flag to be able to attach to processes with gdb due to an upstream Docker bug.
 
 Tools, virtualenvs etc. are installed in `~/tools`.
 
