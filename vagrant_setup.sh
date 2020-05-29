@@ -92,6 +92,19 @@ echo "let g:powerline_pycmd=\"py3\"" | sudo tee -a /root/.vimrc
 echo "set laststatus=2" | sudo tee -a /root/.vimrc
 echo "source /usr/lib/python3.8/site-packages/powerline/bindings/tmux/powerline.conf" >> ~/.tmux.conf
 
+# minimal vim configuration
+echo "syntax on" >> ~/.vimrc
+echo "filetype plugin indent on" >> ~/.vimrc
+echo "set tabstop=4" >> ~/.vimrc
+echo "set shiftwidth=4" >> ~/.vimrc
+echo "set expandtab" >> ~/.vimrc
+
+# one_gadget
+yay -S one_gadget --noconfirm
+
+# enable ptrace
+echo "kernel.yama.ptrace_scope = 0" | sudo tee /etc/sysctl.d/10-ptrace.conf
+
 # Clean up
 sudo paccache --remove --keep 0
 rm -rf ~/aur
