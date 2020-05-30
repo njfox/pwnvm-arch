@@ -58,8 +58,6 @@ This repository contains a launcher script instead at `docker/run.sh` (you need 
 ```
 $ docker/run.sh
 ```
-If you're on OSX, you need to additionally pass the `--privileged` flag to be able to attach to processes with gdb due to an upstream Docker bug.
-
 Tools, virtualenvs etc. are installed in `~/tools`.
 
 #### Mounting Folders
@@ -74,6 +72,15 @@ Add the `-p <host port>:<docker port>` switch to forward ports from the host. Th
 
 ```
 $ docker/run.sh -p 4444:80
+```
+
+#### Enabling Attaching to Processes with gdb
+To be able to attach to processes with gdb on OSX, you need to launch the container with the `--privileged` option. 
+
+Once connected, run the following command to disable yama:
+
+```
+$ echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
 ```
 
 ### Extending the Container
