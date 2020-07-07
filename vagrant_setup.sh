@@ -105,6 +105,9 @@ yay -S one_gadget --noconfirm
 # enable ptrace
 echo "kernel.yama.ptrace_scope = 0" | sudo tee /etc/sysctl.d/10-ptrace.conf
 
+# patchelf
+sudo pacman -S patchelf
+
 # Clean up
 sudo paccache --remove --keep 0
 rm -rf ~/aur

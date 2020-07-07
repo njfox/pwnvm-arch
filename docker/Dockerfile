@@ -130,6 +130,10 @@ RUN yay -S one_gadget --noconfirm \
   && rm -rf ~/.cache/yay \
   && sudo paccache --remove --keep 0
 
+# patchelf
+RUN sudo pacman -S patchelf --noconfirm \
+  && sudo paccache --remove --keep 0
+
 # Clean up
 RUN rm -rf /tmp/aur
 
