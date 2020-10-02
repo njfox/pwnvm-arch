@@ -41,6 +41,9 @@ RUN mkdir /tmp/aur && cd /tmp/aur \
 RUN cd /tmp/aur && yay -G glibc && cd glibc \
   && sed -i 's/options=(!strip staticlibs)/options=(!strip debug staticlibs)/' PKGBUILD \
   && gpg --keyserver keyserver.ubuntu.com --recv-keys 79C43DFBF1CF2187 \
+  && gpg --keyserver keyserver.ubuntu.com --recv-keys 16792B4EA25340F8 \
+  && gpg --keyserver keyserver.ubuntu.com --recv-keys 7273542B39962DF7 \
+  && gpg --keyserver keyserver.ubuntu.com --recv-keys BC7C7372637EC10C \
   && makepkg -si --noconfirm \
   && cd ~ && rm -rf /tmp/aur/glibc
 
